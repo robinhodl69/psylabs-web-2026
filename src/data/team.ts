@@ -1,7 +1,7 @@
 /**
  * team.ts
  * 
- * Directory of core collective identities.
+ * Data source for collective member profiles.
  */
 export interface TeamMember {
     slug: string;
@@ -10,8 +10,7 @@ export interface TeamMember {
 }
 
 export const team: TeamMember[] = [
-    { slug: 'ivan', name: 'Ivan', role: 'Founder' },
-    { slug: 'luchex', name: 'Luchex', role: 'Developer' },
-    { slug: 'robin', name: 'Robin', role: 'Frontend Engineer' },
-    { slug: 'rafa', name: 'Rafa', role: 'Designer' },
+    { slug: 'terratek', name: 'Terratek', role: 'Fullstack' },
+    { slug: 'robin', name: 'Robin', role: 'Frontend' },
+    { slug: 'rafa', name: 'Rafa', role: 'Backend' },
 ];

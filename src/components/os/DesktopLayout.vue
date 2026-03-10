@@ -23,9 +23,8 @@ import PsyDock from './PsyDock.vue'
         style="font-family: var(--font-graffiti);"
         data-text="We build Web3 products with Passion"
       >
-        We build Web3<br>products<br>with Passion
-      </h1>
-    </div>
+        We build Web3<br>products<br>with <span class="passion-power">Passion</span>
+      </h1>    </div>
 
     <!-- 
       Desktop Icons Grid

@@ -73,41 +73,31 @@ function navigateTo(path: string) {
     <Transition name="fade-slide">
       <div 
         v-if="isMenuOpen"
-        class="mb-3 w-56 bg-black/95 backdrop-blur-3xl flex flex-col rounded-2xl overflow-hidden border border-white/10 shadow-2xl"
+        class="mb-3 w-48 liquid-surface flex flex-col rounded-2xl overflow-hidden !border-white/10 shadow-2xl !bg-black/40"
         @click.stop
       >
-        <div class="bg-white/5 px-4 py-2 text-[10px] font-mono uppercase tracking-[0.2em] text-psy-picton border-b border-white/5">
-          Psy Labs // System
-        </div>
-        
         <!-- Application Links -->
-        <button 
-          @click="navigateTo('/games')"
-          class="text-left px-4 py-4 hover:bg-psy-violet/20 hover:text-psy-yellow font-bold uppercase transition-all duration-300 group flex items-center justify-between"
-        >
-          <span class="text-sm">Games</span>
-          <span class="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-mono text-psy-picton">EXE_01</span>
-        </button>
+        <div class="p-2 space-y-1">
+          <button 
+            @click="navigateTo('/games')"
+            class="w-full text-left px-4 py-3 hover:bg-psy-violet/30 hover:text-psy-yellow rounded-xl font-bold uppercase transition-all duration-300 flex items-center"
+          >
+            <span class="text-xs">Games</span>
+          </button>
 
-        <button 
-          @click="navigateTo('/terminal')"
-          class="text-left px-4 py-4 hover:bg-psy-violet/20 hover:text-psy-yellow font-bold uppercase transition-all duration-300 group flex items-center justify-between border-t border-white/5"
-        >
-          <span class="text-sm">Terminal</span>
-          <span class="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-mono text-psy-picton">SYS_ROOT</span>
-        </button>
+          <button 
+            @click="navigateTo('/terminal')"
+            class="w-full text-left px-4 py-3 hover:bg-psy-violet/30 hover:text-psy-yellow rounded-xl font-bold uppercase transition-all duration-300 flex items-center"
+          >
+            <span class="text-xs">Terminal</span>
+          </button>
 
-        <button 
-          @click="navigateTo('/music')"
-          class="text-left px-4 py-4 hover:bg-psy-violet/20 hover:text-psy-yellow font-bold uppercase transition-all duration-300 group flex items-center justify-between border-t border-white/5"
-        >
-          <span class="text-sm">Music</span>
-          <span class="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-mono text-psy-picton">AV_01</span>
-        </button>
-
-        <!-- Version Info -->
-        <div class="mt-auto bg-white/5 p-2 text-[8px] font-mono text-center text-white/30 uppercase tracking-widest">
-          v1.0.0-PROD
+          <button 
+            @click="navigateTo('/music')"
+            class="w-full text-left px-4 py-3 hover:bg-psy-violet/30 hover:text-psy-yellow rounded-xl font-bold uppercase transition-all duration-300 flex items-center"
+          >
+            <span class="text-xs">Music</span>
+          </button>
         </div>
       </div>
     </Transition>

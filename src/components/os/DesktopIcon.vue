@@ -4,6 +4,7 @@
  * 
  * Individual application launcher with integrated spatial dragging logic.
  * Differentiates between dragging and single-click navigation via delta tracking.
+ * Supports an optional 'color' prop for holographic brand styling.
  */
 import { ref, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
@@ -12,6 +13,7 @@ const props = defineProps<{
   name: string
   iconName: string
   to: string
+  color?: string
 }>()
 
 const router = useRouter()
@@ -98,20 +100,51 @@ onUnmounted(() => {
     @touchstart="startDrag"
     @click="handleClick"
   >
-    <img 
-      :src="getIconUrl(iconName)" 
-      class="w-16 h-16 mb-2 drop-shadow-[0_8px_16px_rgba(132,59,253,0.3)] filter pointer-events-none" 
-      :alt="name"
-    />
-    <span class="text-[10px] text-center font-mono leading-tight bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded-full border border-white/10 group-hover:bg-psy-violet group-hover:text-white transition-all">{{ name }}</span>
+    <!-- Dynamic Holographic Icon -->
+    <div class="relative w-16 h-16 mb-2 flex items-center justify-center icon-wrapper transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-2">
+      <div 
+        v-if="color"
+        class="w-full h-full transition-all duration-500 opacity-90 group-hover:opacity-100"
+        :style="{
+          backgroundColor: color,
+          maskImage: `url(${getIconUrl(iconName)})`,
+          webkitMaskImage: `url(${getIconUrl(iconName)})`,
+          maskSize: 'contain',
+          webkitMaskSize: 'contain',
+          maskRepeat: 'no-repeat',
+          webkitMaskRepeat: 'no-repeat',
+          maskPosition: 'center',
+          webkitMaskPosition: 'center'
+        }"
+      ></div>
+      <img 
+        v-else
+        :src="getIconUrl(iconName)" 
+        class="w-full h-full drop-shadow-[0_8px_16px_rgba(132,59,253,0.3)] filter pointer-events-none" 
+        :alt="name"
+      />
+      <!-- Dynamic Glow for colored icons -->
+      <div v-if="color" 
+           class="absolute inset-0 blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none"
+           :style="{
+             backgroundColor: color,
+             maskImage: `url(${getIconUrl(iconName)})`,
+             webkitMaskImage: `url(${getIconUrl(iconName)})`,
+             maskSize: 'contain',
+             webkitMaskSize: 'contain',
+             maskRepeat: 'no-repeat',
+             webkitMaskRepeat: 'no-repeat',
+             maskPosition: 'center',
+             webkitMaskPosition: 'center'
+           }"
+      ></div>
+    </div>
+    <span class="text-[10px] text-center font-mono leading-tight liquid-surface !rounded-full px-3 py-1 border border-white/10 group-hover:bg-psy-violet group-hover:text-white transition-all shadow-lg whitespace-nowrap">{{ name }}</span>
   </div>
 </template>
 
 <style scoped>
-img {
-  transition: transform 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-}
-.desktop-icon-container:hover img {
-  transform: translateY(-12px) scale(1.15);
+.icon-wrapper {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 </style>
