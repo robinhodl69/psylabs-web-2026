@@ -133,7 +133,6 @@ function endGame() {
   isPlaying.value = false
   if (gameLoop) clearInterval(gameLoop)
   // Simple system alert 
-  console.log(`Final Score: ${score.value}`)
 }
 
 onMounted(() => {

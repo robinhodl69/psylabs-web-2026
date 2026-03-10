@@ -24,12 +24,12 @@ const props = defineProps<{
 
 const router = useRouter()
 
-// Standard window states
+// Reactive application context
 const isMaximized = ref(false)
 const zIndex = ref(globalZIndex)
 const isMobile = ref(false)
 
-// Dragging and positioning state
+// Spatial and interaction state
 const position = ref({ x: 0, y: 0 })
 const isDragging = ref(false)
 const dragOffset = { x: 0, y: 0 }
@@ -41,7 +41,7 @@ onMounted(() => {
   checkMobile()
   window.addEventListener('resize', checkMobile)
 
-  // Initialize centered position for desktop users
+  // Default spatial initialization (Desktop)
   if (!isMobile.value) {
     const width = window.innerWidth * 0.7
     const height = window.innerHeight * 0.8
@@ -51,7 +51,7 @@ onMounted(() => {
 })
 
 /**
- * Brings the window to the top of the stack.
+ * Promotes the window to the top of the viewport stack.
  */
 function bringToFront() {
   globalZIndex++
@@ -59,8 +59,8 @@ function bringToFront() {
 }
 
 /**
- * Initiates the drag sequence.
- * @param e - Mouse or Touch event.
+ * Orchestrates the drag interaction sequence.
+ * Disabled for mobile and maximized states to preserve UX constraints.
  */
 function startDrag(e: MouseEvent | TouchEvent) {
   if (isMaximized.value || isMobile.value) return
@@ -81,7 +81,7 @@ function startDrag(e: MouseEvent | TouchEvent) {
 }
 
 /**
- * Handles the dragging movement updates.
+ * Updates spatial coordinates relative to the initial offset.
  */
 function onDrag(e: MouseEvent | TouchEvent) {
   if (!isDragging.value) return
@@ -94,7 +94,7 @@ function onDrag(e: MouseEvent | TouchEvent) {
 }
 
 /**
- * Terminates the drag sequence and cleans up listeners.
+ * Concludes the drag lifecycle and deallocates global event listeners.
  */
 function stopDrag() {
   isDragging.value = false
@@ -105,7 +105,7 @@ function stopDrag() {
 }
 
 /**
- * Toggles the maximized/restored state of the window.
+ * Synchronizes window boundaries with the full viewport.
  */
 function toggleMaximize() {
   isMaximized.value = !isMaximized.value
@@ -113,14 +113,14 @@ function toggleMaximize() {
 }
 
 /**
- * Closes the window and reverts to the base desktop route.
+ * Executes cleanup and restores the primary desktop route.
  */
 function closeWindow() {
   router.push('/')
 }
 
 /**
- * Computes reactive styles based on current state.
+ * Reactive style computation for spatial positioning and layering.
  */
 const containerStyle = computed(() => {
   if (isMaximized.value || isMobile.value) {

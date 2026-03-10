@@ -1,4 +1,10 @@
 <script setup lang="ts">
+/**
+ * DesktopIcon Component
+ * 
+ * Individual application launcher with integrated spatial dragging logic.
+ * Differentiates between dragging and single-click navigation via delta tracking.
+ */
 import { ref, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -10,12 +16,15 @@ const props = defineProps<{
 
 const router = useRouter()
 
-// Dragging State
+// Motion State
 const position = ref({ x: 0, y: 0 })
 const isDragging = ref(false)
 const dragStart = { x: 0, y: 0 }
-const totalDelta = ref(0) // To check if it's a click or a move
+const totalDelta = ref(0) // Movement accumulator for intent detection
 
+/**
+ * Initiates the dragging lifecycle for both mouse and touch interfaces.
+ */
 function startDrag(e: MouseEvent | TouchEvent) {
   isDragging.value = true
   totalDelta.value = 0
@@ -32,6 +41,9 @@ function startDrag(e: MouseEvent | TouchEvent) {
   document.addEventListener('touchend', stopDrag)
 }
 
+/**
+ * Synchronizes component coordinates with user pointer movement.
+ */
 function onDrag(e: MouseEvent | TouchEvent) {
   if (!isDragging.value) return
   
@@ -41,13 +53,16 @@ function onDrag(e: MouseEvent | TouchEvent) {
   const newX = clientX - dragStart.x
   const newY = clientY - dragStart.y
   
-  // Calculate movement distance
+  // Update intent accumulator
   totalDelta.value += Math.abs(newX - position.value.x) + Math.abs(newY - position.value.y)
   
   position.value.x = newX
   position.value.y = newY
 }
 
+/**
+ * Terminates motion interaction and cleans up global listeners.
+ */
 function stopDrag() {
   isDragging.value = false
   document.removeEventListener('mousemove', onDrag)
@@ -56,13 +71,18 @@ function stopDrag() {
   document.removeEventListener('touchend', stopDrag)
 }
 
+/**
+ * Evaluates navigation intent based on total movement delta.
+ */
 function handleClick() {
-  // If we moved the icon significantly, don't trigger the click navigation
   if (totalDelta.value < 10) {
     router.push(props.to)
   }
 }
 
+/**
+ * Dynamic asset resolution using Vite's URL helper.
+ */
 const getIconUrl = (name: string) => new URL(`../../assets/${name}`, import.meta.url).href
 
 onUnmounted(() => {

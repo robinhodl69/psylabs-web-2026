@@ -14,8 +14,8 @@ const currentTime = ref('')
 const isMenuOpen = ref(false)
 
 /**
- * Toggles the Start Menu visibility.
- * Stops propagation to prevent document level close listener from firing.
+ * Toggles the visibility of the primary Start Menu.
+ * Prevents event propagation to avoid conflict with document-level close listeners.
  */
 function toggleMenu(e: Event) {
   e.stopPropagation()
@@ -23,14 +23,15 @@ function toggleMenu(e: Event) {
 }
 
 /**
- * Closes the Start Menu.
+ * Ensures the Start Menu is closed.
  */
 function closeMenu() {
   isMenuOpen.value = false
 }
 
 /**
- * Updates the internal clock state in UTC format.
+ * Refreshes the system clock state.
+ * Syncs to UTC for global team coordination.
  */
 function updateTime() {
   const now = new Date()
@@ -45,7 +46,7 @@ function updateTime() {
 let timer: number
 
 onMounted(() => {
-  // Global click listener to close menu when clicking outside
+  // Attach global closure listener for outside clicks
   document.addEventListener('click', closeMenu)
   updateTime()
   timer = window.setInterval(updateTime, 1000)
@@ -57,7 +58,7 @@ onUnmounted(() => {
 })
 
 /**
- * Navigates to a specific route and ensures the menu is closed.
+ * Handles navigation intent and resets menu state.
  */
 function navigateTo(path: string) {
   router.push(path)
