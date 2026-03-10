@@ -108,13 +108,9 @@ onUnmounted(() => {
         :style="{
           backgroundColor: color,
           maskImage: `url(${getIconUrl(iconName)})`,
-          webkitMaskImage: `url(${getIconUrl(iconName)})`,
           maskSize: 'contain',
-          webkitMaskSize: 'contain',
           maskRepeat: 'no-repeat',
-          webkitMaskRepeat: 'no-repeat',
-          maskPosition: 'center',
-          webkitMaskPosition: 'center'
+          maskPosition: 'center'
         }"
       ></div>
       <img 
@@ -129,13 +125,9 @@ onUnmounted(() => {
            :style="{
              backgroundColor: color,
              maskImage: `url(${getIconUrl(iconName)})`,
-             webkitMaskImage: `url(${getIconUrl(iconName)})`,
              maskSize: 'contain',
-             webkitMaskSize: 'contain',
              maskRepeat: 'no-repeat',
-             webkitMaskRepeat: 'no-repeat',
-             maskPosition: 'center',
-             webkitMaskPosition: 'center'
+             maskPosition: 'center'
            }"
       ></div>
     </div>
