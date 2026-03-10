@@ -146,7 +146,7 @@ onUnmounted(() => {
         isMaximized 
           ? 'inset-0 w-screen h-screen border-none !z-[100] !rounded-none shadow-none' 
           : 'w-screen h-screen top-0 left-0 border-none md:w-[70vw] md:h-[80vh] md:border md:border-white/10',
-        isTerminal ? 'bg-black/95 backdrop-blur-3xl rounded-2xl' : 'liquid-surface rounded-2xl'
+        'liquid-surface rounded-2xl'
       ]"
       :style="containerStyle"
       @mousedown="bringToFront"

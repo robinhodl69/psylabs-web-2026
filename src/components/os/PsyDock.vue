@@ -73,7 +73,7 @@ function navigateTo(path: string) {
     <Transition name="fade-slide">
       <div 
         v-if="isMenuOpen"
-        class="mb-3 w-48 liquid-surface flex flex-col rounded-2xl overflow-hidden !border-white/10 shadow-2xl !bg-black/40"
+        class="mb-3 w-48 liquid-surface flex flex-col rounded-2xl overflow-hidden shadow-2xl"
         @click.stop
       >
         <!-- Application Links -->
@@ -104,7 +104,7 @@ function navigateTo(path: string) {
 
     <!-- Main Navigation Dock -->
     <div 
-      class="h-14 px-2 flex items-center justify-between liquid-surface w-[320px] md:w-[450px] !rounded-full shadow-[0_8px_32px_0_rgba(132,59,253,0.3)] !border-white/10"
+      class="h-14 px-2 flex items-center justify-between liquid-surface w-[320px] md:w-[450px] !rounded-full shadow-[0_8px_32px_0_rgba(132,59,253,0.3)]"
     >
       <div class="flex-none flex justify-start pl-2">
         <!-- Start Button -->

@@ -74,7 +74,4 @@ const getMemberColorClass = (slug: string) => {
 </template>
 
 <style scoped>
-.liquid-surface {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.1) 100%);
-}
 </style>
