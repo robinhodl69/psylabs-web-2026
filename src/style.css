@@ -254,6 +254,13 @@ h3 {
   animation: psy-liquid-flow 12s ease-in-out infinite alternate;
 }
 
+/* Hack para Safari (Detecta que es Safari y sobreescribe el grosor para evitar el glitch gordo) */
+@supports (background: -webkit-named-image(i)) {
+  .text-liquid-graffiti {
+    -webkit-text-stroke: 1.5px #1e1b4b;
+  }
+}
+
 .passion-power {
   position: relative;
   display: inline-block;
