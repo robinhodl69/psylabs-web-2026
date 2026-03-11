@@ -13,13 +13,6 @@ export interface Achievement {
 
 export const achievements: Achievement[] = [
     {
-        slug: 'polkadot-relayers-2023',
-        title: 'Polkadot Relayers Singapore 2023',
-        date: '2023',
-        description: 'Selected for Polkadot’s official builder program, gaining direct mentorship and connecting with core ecosystem stakeholders.',
-        url: 'https://angelhack.com/blog/polkadot-relayers-incubator-2023/'
-    },
-    {
         slug: 'ethbrussels-2024-winner',
         title: 'ETHBrussels 2024 - Vara Network Winners Track',
         date: '2024',

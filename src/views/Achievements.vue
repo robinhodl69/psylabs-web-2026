@@ -16,7 +16,7 @@ import { achievements } from '../data/achievements'
     <div class="space-y-4">
       <!-- Achievement Record Card -->
       <div 
-        v-for="achiev in achievements" 
+        v-for="achiev in [...achievements].reverse()" 
         :key="achiev.slug"
         class="bg-black/40 backdrop-blur-md p-6 rounded-2xl border border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-psy-violet/30 transition-colors group"
       >
