@@ -24,6 +24,25 @@ import WindowContainer from '../components/os/WindowContainer.vue'
             We are a collective of passionate builders, united by a shared vision to elevate the Web3 ecosystem to the heights it deserves. We believe in the transformative power of technology that is being driven by a deep commitment to <span class="text-psy-yellow font-bold uppercase tracking-widest">security</span>, <span class="text-psy-picton font-bold uppercase tracking-widest">scalability</span>, and <span class="text-psy-picton font-bold uppercase tracking-widest">decentralization</span>.
           </p>
         </div>
+
+        <!-- Ecosystem Links -->
+        <div class="pt-10 mt-6 flex gap-6 border-t border-white/5">
+          <a 
+            href="https://github.com/orgs/PsyLabsWeb3" 
+            target="_blank" 
+            class="text-xs font-code uppercase font-bold tracking-[0.2em] text-white/50 hover:text-white transition-colors"
+          >
+            [ GitHub ]
+          </a>
+
+          <a 
+            href="https://farcaster.xyz/psylabs" 
+            target="_blank" 
+            class="text-xs font-code uppercase font-bold tracking-[0.2em] text-white/50 hover:text-psy-violet transition-colors"
+          >
+            [ Farcaster ]
+          </a>
+        </div>
       </div>
     </div>
   </WindowContainer>

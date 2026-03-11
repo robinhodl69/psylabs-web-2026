@@ -28,7 +28,7 @@ const getMemberColorClass = (slug: string) => {
 
 <template>
   <WindowContainer title="Collective Team">
-    <div class="h-full flex flex-col justify-center py-4 px-4 md:px-10">
+    <div class="flex flex-col justify-center py-8 px-4 md:px-10">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
         <!-- Member Identity Card -->
         <div 
@@ -57,10 +57,22 @@ const getMemberColorClass = (slug: string) => {
 
           <!-- Vintage Social Links -->
           <div class="flex gap-4 mt-2">
-            <a href="#" :class="['text-[10px] font-code transition-all font-black tracking-widest hover:-translate-y-1', getMemberColorClass(member.slug)]">
+            <a 
+              v-if="member.x"
+              :href="member.x" 
+              target="_blank"
+              rel="noopener noreferrer"
+              :class="['text-[10px] font-code transition-all font-black tracking-widest hover:-translate-y-1', getMemberColorClass(member.slug)]"
+            >
               [X]
             </a>
-            <a href="#" :class="['text-[10px] font-code transition-all font-black tracking-widest hover:-translate-y-1', getMemberColorClass(member.slug)]">
+            <a 
+              v-if="member.github"
+              :href="member.github" 
+              target="_blank"
+              rel="noopener noreferrer"
+              :class="['text-[10px] font-code transition-all font-black tracking-widest hover:-translate-y-1', getMemberColorClass(member.slug)]"
+            >
               [GITHUB]
             </a>
           </div>

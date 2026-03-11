@@ -239,6 +239,14 @@ function handleKeys(e: KeyboardEvent) {
   }
 }
 
+// --- MOBILE TOUCH CONTROLS ---
+function handleTouchDir(newDx: number, newDy: number) {
+  if (activeGame.value === 'SNAKE' && isPlaying.value) {
+    if (newDx !== 0 && dx === 0) { dx = newDx; dy = 0 }
+    if (newDy !== 0 && dy === 0) { dx = 0; dy = newDy }
+  }
+}
+
 onMounted(() => window.addEventListener('keydown', handleKeys))
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeys)
@@ -248,7 +256,7 @@ onUnmounted(() => {
 
 <template>
   <WindowContainer :title="activeGame === 'HUB' ? 'Arcade Terminal' : activeGame">
-    <div class="h-full flex flex-col items-center p-4 md:p-8 relative overflow-hidden">
+    <div class="flex flex-col items-center p-4 md:p-8 relative">
       
       <!-- --- ARCADE HUB --- -->
       <div v-if="activeGame === 'HUB'" class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 animate-slide-up">
@@ -276,10 +284,12 @@ onUnmounted(() => {
       </div>
 
       <!-- --- ACTIVE GAME VIEW --- -->
-      <div v-else class="w-full flex flex-col items-center animate-slide-up">
-        <button @click="setGame('HUB'); isPlaying = false" class="btn-liquid-gloss !px-3 !py-1 !text-[9px] absolute top-4 left-4 z-50">
-          « Back to Hub
-        </button>
+      <div v-else class="w-full flex flex-col items-center animate-slide-up h-full overflow-y-auto pb-20 custom-scrollbar">
+        <div class="w-full max-w-[400px] flex justify-start mb-4">
+          <button @click="setGame('HUB'); isPlaying = false" class="btn-liquid-yellow !px-4 !py-1.5 !text-[10px] z-50">
+            « BACK
+          </button>
+        </div>
 
         <!-- NEON SNAKE VIEW -->
         <template v-if="activeGame === 'SNAKE'">
@@ -293,13 +303,24 @@ onUnmounted(() => {
               <div class="text-white/60 text-xs font-bold leading-none">{{ snakeState.highScore.toString().padStart(5, '0') }}</div>
             </div>
           </div>
-          <div class="relative rounded-lg border-4 border-[#1a1a1a] shadow-2xl overflow-hidden">
-            <canvas ref="canvasRef" width="400" height="400" class="bg-black block"></canvas>
+          <div class="relative rounded-lg border-4 border-[#1a1a1a] shadow-2xl overflow-hidden w-full max-w-[400px] aspect-square">
+            <canvas ref="canvasRef" width="400" height="400" class="bg-black block w-full h-full object-contain"></canvas>
             <div v-if="!isPlaying" class="absolute inset-0 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm z-20">
               <h3 class="text-2xl font-black text-psy-yellow italic mb-6 animate-bounce uppercase">Insert Coin</h3>
-              <button @click="initSnake" class="btn-liquid-gloss !px-6 !py-2 text-sm">Play</button>
+              <button @click="initSnake" class="btn-liquid-yellow !px-6 !py-2 text-sm">Play</button>
             </div>
             <div class="pointer-events-none absolute inset-0 z-30 opacity-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,4px_100%]"></div>
+          </div>
+          
+          <!-- MOBILE D-PAD FOR SNAKE -->
+          <div v-if="isPlaying" class="mt-8 flex flex-col items-center justify-center gap-2 md:hidden">
+            <button @touchstart.prevent="handleTouchDir(0, -1)" @click="handleTouchDir(0, -1)" class="w-16 h-16 bg-[#1a1a1a] border-b-4 border-black active:border-b-0 active:translate-y-1 rounded-xl flex items-center justify-center text-white/50 active:text-psy-yellow transition-all">▲</button>
+            <div class="flex gap-2">
+              <button @touchstart.prevent="handleTouchDir(-1, 0)" @click="handleTouchDir(-1, 0)" class="w-16 h-16 bg-[#1a1a1a] border-b-4 border-black active:border-b-0 active:translate-y-1 rounded-xl flex items-center justify-center text-white/50 active:text-psy-yellow transition-all">◀</button>
+              <div class="w-16 h-16 rounded-full bg-black/20 flex items-center justify-center shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)]"><div class="w-6 h-6 rounded-full bg-psy-yellow/20"></div></div>
+              <button @touchstart.prevent="handleTouchDir(1, 0)" @click="handleTouchDir(1, 0)" class="w-16 h-16 bg-[#1a1a1a] border-b-4 border-black active:border-b-0 active:translate-y-1 rounded-xl flex items-center justify-center text-white/50 active:text-psy-yellow transition-all">▶</button>
+            </div>
+            <button @touchstart.prevent="handleTouchDir(0, 1)" @click="handleTouchDir(0, 1)" class="w-16 h-16 bg-[#1a1a1a] border-b-4 border-black active:border-b-0 active:translate-y-1 rounded-xl flex items-center justify-center text-white/50 active:text-psy-yellow transition-all">▼</button>
           </div>
         </template>
 
@@ -315,8 +336,8 @@ onUnmounted(() => {
               <div class="text-white/60 text-xs font-bold leading-none">{{ minesState.highScore.toString().padStart(5, '0') }}</div>
             </div>
           </div>
-          <div class="relative rounded-lg border-4 border-[#1a1a1a] shadow-2xl overflow-hidden p-2 bg-[#1a1a1a]">
-            <div class="grid grid-cols-10 gap-1 w-[300px] h-[320px]" :class="{ 'animate-shake': minesState.gameOver && !minesState.showOverlay }">
+          <div class="relative rounded-lg border-4 border-[#1a1a1a] shadow-2xl overflow-hidden p-2 bg-[#1a1a1a] w-full max-w-[320px] aspect-square">
+            <div class="grid grid-cols-10 gap-1 w-full h-full" :class="{ 'animate-shake': minesState.gameOver && !minesState.showOverlay }">
               <template v-for="(row, y) in minesState.grid" :key="y">
                 <div 
                   v-for="(cell, x) in row" :key="x"
@@ -340,7 +361,7 @@ onUnmounted(() => {
               <button @click="initMines" class="btn-liquid-gloss !px-6 !py-2 text-sm !bg-[#FF00FF] !text-white">Retry</button>
             </div>
             <div v-if="minesState.grid.length === 0" class="absolute inset-0 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm z-20">
-              <button @click="initMines" class="btn-liquid-gloss !px-6 !py-2 text-sm">Start</button>
+              <button @click="initMines" class="btn-liquid-yellow !px-6 !py-2 text-sm">Start</button>
             </div>
             <div class="pointer-events-none absolute inset-0 z-30 opacity-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,4px_100%]"></div>
           </div>

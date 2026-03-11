@@ -67,7 +67,7 @@ function navigateTo(path: string) {
 </script>
 
 <template>
-  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-45 flex flex-col items-center pointer-events-auto">
+  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-auto">
     
     <!-- Start Menu (Liquid Component) -->
     <Transition name="fade-slide">

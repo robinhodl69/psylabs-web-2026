@@ -30,25 +30,30 @@ function goBack() {
   <WindowContainer :title="achievement ? `Achievement: ${achievement.title}` : 'Not Found'">
     <div v-if="achievement" class="space-y-6 max-w-4xl mx-auto py-2">
       <!-- Navigator -->
-      <button @click="goBack" class="btn-liquid-gloss !px-6 !py-1.5 !text-[10px] !bg-psy-yellow !text-black border-none shadow-sm tracking-[0.2em]">
-        &lt; RETURN_TO_LIST
+      <button @click="goBack" class="btn-liquid-yellow !px-6 !py-1.5 !text-[10px]">
+        &lt; BACK
       </button>
       
       <div class="mt-4">
-        <h1 class="text-4xl md:text-5xl text-white font-bold uppercase text-glow-psy font-system leading-tight">
+        <h1 class="text-2xl md:text-3xl text-white font-bold uppercase text-glow-psy font-system leading-tight">
           {{ achievement.title }}
         </h1>
-        <div class="flex items-center gap-3 mt-4 px-1">
-          <div class="w-1.5 h-1.5 rounded-full bg-psy-picton animate-pulse"></div>
-          <p class="text-[10px] font-code text-psy-picton font-bold uppercase tracking-[0.3em]">
-            LOG_STAMP // {{ achievement.date }}
-          </p>
-        </div>
       </div>
       
       <!-- Content Area -->
       <div class="bg-black/40 backdrop-blur-md p-8 md:p-12 rounded-3xl border border-white/10 text-lg text-white/90 leading-relaxed shadow-2xl font-body font-light italic border-l-psy-violet border-l-4">
         "{{ achievement.description }}"
+        
+        <div v-if="achievement.url" class="mt-10 flex justify-end">
+          <a 
+            :href="achievement.url" 
+            target="_blank" 
+            class="text-psy-yellow/80 hover:text-psy-yellow font-code text-[11px] tracking-[0.3em] uppercase transition-all duration-300 flex items-center group"
+          >
+            <span class="mr-2 opacity-50 group-hover:opacity-100 transition-opacity">//</span>
+            view more
+          </a>
+        </div>
       </div>
     </div>
     

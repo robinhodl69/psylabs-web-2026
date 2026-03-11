@@ -24,16 +24,10 @@ import { achievements } from '../data/achievements'
           <h2 class="text-xl font-bold uppercase text-white group-hover:text-psy-yellow transition-colors duration-300">
             {{ achiev.title }}
           </h2>
-          <div class="flex items-center gap-2 mt-1">
-            <span class="w-1 h-1 rounded-full bg-psy-picton animate-pulse"></span>
-            <p class="font-code text-psy-picton font-bold text-[10px] tracking-widest uppercase">
-              RECOGNIZED: {{ achiev.date }}
-            </p>
-          </div>
         </div>
         
-        <router-link :to="`/achievements/${achiev.slug}`" class="btn-liquid-gloss text-center min-w-[140px] text-sm py-2.5">
-          VIEW_DEBRIEF
+        <router-link :to="`/achievements/${achiev.slug}`" class="btn-liquid-yellow text-center min-w-[140px] text-sm py-2.5">
+          VIEW
         </router-link>
       </div>
     </div>

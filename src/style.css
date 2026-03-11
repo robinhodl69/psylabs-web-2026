@@ -35,13 +35,13 @@
 .liquid-surface {
   border-radius: var(--radius-liquid);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  /* Refuerzo de opacidad base para producción */
+  /* Enforce base opacity for production stability */
   background-color: rgba(5, 5, 5, 0.7);
   background-image: linear-gradient(135deg, rgba(132, 59, 253, 0.15) 0%, rgba(5, 5, 5, 0.9) 100%);
-  /* Máximo blur para evitar transparencia excesiva */
+  /* Maximize blur to prevent excessive background bleed */
   backdrop-filter: blur(50px) saturate(200%);
   -webkit-backdrop-filter: blur(50px) saturate(200%);
-  /* Forzamos a la GPU para que el renderizado de capas sea denso */
+  /* Force GPU acceleration for dense layer rendering */
   transform: translateZ(0);
   box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.08), var(--shadow-liquid);
 }
@@ -65,27 +65,80 @@
   filter: drop-shadow(0 0 10px rgba(253, 229, 59, 0.8));
 }
 
+.btn-liquid-yellow {
+  border-radius: 9999px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  padding: 0.5rem 2rem;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+
+  /* Aqua Liquid Aesthetic (Vibrant & Crystalline) */
+  background: linear-gradient(180deg, rgba(253, 229, 59, 0.15) 0%, rgba(253, 229, 59, 0.05) 100%);
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+
+  color: var(--color-psy-yellow);
+  border: 1px solid rgba(253, 229, 59, 0.3);
+
+  /* Inner highlights for Aqua effect */
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    inset 0 -1px 8px rgba(253, 229, 59, 0.1),
+    0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-liquid-yellow:hover {
+  background: linear-gradient(180deg, rgba(253, 229, 59, 0.3) 0%, rgba(253, 229, 59, 0.15) 100%);
+  border-color: rgba(253, 229, 59, 0.6);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 20px rgba(253, 229, 59, 0.25),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
 .bg-abstract {
   background-color: #000000;
   background-image:
-    /* CAPA 1: Noise Vintage Potenciado */
+    /* LAYER 1: Enhanced Vintage Noise */
     url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.35'/%3E%3C/svg%3E"),
-    /* CAPA 2: Mesh Gradient Desuniforme */
+    /* LAYER 2: Non-uniform Mesh Gradient */
     radial-gradient(at 80% 10%, rgba(59, 180, 253, 0.15) 0%, transparent 50%),
     radial-gradient(at 10% 90%, rgba(132, 59, 253, 0.18) 0%, transparent 60%),
     radial-gradient(at 25% 20%, rgba(132, 59, 253, 0.12) 0%, transparent 40%),
     radial-gradient(at 90% 85%, rgba(59, 180, 253, 0.1) 0%, transparent 50%),
     radial-gradient(at 50% 50%, rgba(132, 59, 253, 0.05) 0%, transparent 70%);
-  
+
   background-attachment: fixed;
   background-blend-mode: overlay, screen, screen, screen, screen, screen;
 }
 
 @keyframes vhs-glitch {
-  0%, 94%, 96%, 100% { transform: none; filter: brightness(1) hue-rotate(0deg); }
-  95% { transform: translateX(1px) skewX(0.1deg); filter: brightness(1.05) hue-rotate(2deg); }
-  95.5% { transform: translateX(-1px); filter: brightness(0.95) hue-rotate(-2deg); }
-  97% { transform: translateX(0) skewX(-0.1deg); filter: brightness(1.1); }
+
+  0%,
+  94%,
+  96%,
+  100% {
+    transform: none;
+    filter: brightness(1) hue-rotate(0deg);
+  }
+
+  95% {
+    transform: translateX(1px) skewX(0.1deg);
+    filter: brightness(1.05) hue-rotate(2deg);
+  }
+
+  95.5% {
+    transform: translateX(-1px);
+    filter: brightness(0.95) hue-rotate(-2deg);
+  }
+
+  97% {
+    transform: translateX(0) skewX(-0.1deg);
+    filter: brightness(1.1);
+  }
 }
 
 @keyframes pulse-slow {
@@ -163,36 +216,41 @@ h3 {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  
-  /* Inflado Técnico (Borde ligeramente más fino para dejar pasar la luz) */
+
+  /* Technical Inflation (Slightly thinner border to let light through) */
   -webkit-text-stroke: 6px #1e1b4b;
   paint-order: stroke fill;
-  
-  /* Refractive Gradient (Colores ultra-saturados y vibrantes) */
-  background-image: linear-gradient(
-    135deg,
-    #3BB4FD 0%,    /* Psy Blue */
-    #843BFD 40%,   /* Psy Violet */
-    #FDE53B 65%,   /* Psy Yellow */
-    #d946ef 85%,   /* Magenta Pop */
-    #3BB4FD 100%
-  );
+
+  /* Refractive Gradient (Ultra-saturated and vibrant colors) */
+  background-image: linear-gradient(135deg,
+      #3BB4FD 0%,
+      /* Psy Blue */
+      #843BFD 40%,
+      /* Psy Violet */
+      #FDE53B 65%,
+      /* Psy Yellow */
+      #d946ef 85%,
+      /* Magenta Pop */
+      #3BB4FD 100%);
   background-size: 200% auto;
-  
-  /* Relieve Cristalino y Saturación */
-  text-shadow: 
-    -1px -1px 0px rgba(255, 255, 255, 0.5), /* Brillo de borde superior nítido */
-    2px 2px 2px rgba(0, 0, 0, 0.8),         /* Sombra de relieve */
-    0 10px 20px rgba(132, 59, 253, 0.3);    /* Aura de volumen */
-  
-  /* Filtros de brillo y color para evitar la opacidad */
+
+  /* Crystalline Relief and Saturation */
+  text-shadow:
+    -1px -1px 0px rgba(255, 255, 255, 0.5),
+    /* Sharp top-edge highlight */
+    2px 2px 2px rgba(0, 0, 0, 0.8),
+    /* Relief shadow */
+    0 10px 20px rgba(132, 59, 253, 0.3);
+  /* Volume aura */
+
+  /* Brightness and color filters to prevent dullness */
   filter: brightness(1.1) saturate(1.4) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
-  
+
   line-height: 0.95;
   letter-spacing: -0.02em;
   -webkit-font-smoothing: antialiased;
-  
-  /* Animación de flujo interno */
+
+  /* Internal flow animation */
   animation: psy-liquid-flow 12s ease-in-out infinite alternate;
 }
 
@@ -208,32 +266,39 @@ h3 {
   left: -5%;
   width: 112%;
   height: 14px;
-  /* Relleno Líquido Amarillo (Tonos Psy) */
+  /* Liquid Yellow Fill (Psy Tones) */
   background: linear-gradient(90deg, #FDE53B, #FFF280, #FDE53B, #FFD700, #FDE53B);
   background-size: 200% auto;
-  
-  /* Forma Irregular de Rayón de Graffiti */
+
+  /* Irregular Graffiti Stroke Shape */
   border-radius: 120% 15% 90% 10% / 50% 10% 80% 20%;
   transform: scaleX(0) skewX(-15deg) rotate(-1deg);
   transform-origin: left;
-  
-  /* Sombra de Pintura Real */
+
+  /* Realistic Paint Drop Shadow */
   filter: drop-shadow(0 4px 10px rgba(253, 229, 59, 0.4));
   z-index: -1;
-  
-  /* Animaciones: Dibujo + Flujo de Pintura */
-  animation: 
+
+  /* Animations: Drawing + Paint Flow */
+  animation:
     draw-stroke-rayon 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s,
     psy-liquid-flow 8s linear infinite;
 }
 
 @keyframes draw-stroke-rayon {
-  to { transform: scaleX(1) skewX(-15deg) rotate(-1deg); }
+  to {
+    transform: scaleX(1) skewX(-15deg) rotate(-1deg);
+  }
 }
 
 @keyframes liquid-text-flow {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 .text-glow-psy {

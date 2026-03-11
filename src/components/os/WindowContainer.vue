@@ -145,7 +145,7 @@ onUnmounted(() => {
       :class="[
         isMaximized 
           ? 'inset-0 w-screen h-screen border-none !z-[100] !rounded-none shadow-none' 
-          : 'w-screen h-screen top-0 left-0 border-none md:w-[70vw] md:h-[80vh] md:border md:border-white/10',
+          : 'w-screen h-[100dvh] top-0 left-0 border-none md:w-[70vw] md:h-[80vh] md:border md:border-white/10',
         'liquid-surface rounded-2xl'
       ]"
       :style="containerStyle"
@@ -185,10 +185,10 @@ onUnmounted(() => {
           <!-- Exit Button -->
           <button 
             @click="closeWindow" 
-            class="w-8 h-8 liquid-surface !rounded-full flex items-center justify-center hover:!bg-red-500 hover:!text-white transition-all cursor-pointer border border-white/10"
+            class="w-8 h-8 liquid-surface !rounded-full flex items-center justify-center hover:!bg-red-500 hover:!text-white transition-all cursor-pointer border border-white/10 shrink-0"
             title="Exit Application"
           >
-            <span class="text-[10px] font-bold">✕</span>
+            <span class="text-xs font-system font-bold leading-none mt-[1px]">✕</span>
           </button>
         </div>
       </div>
@@ -215,7 +215,7 @@ onUnmounted(() => {
       <!-- Global Application Content Area -->
       <div 
         class="flex-1 overflow-y-auto custom-scrollbar"
-        :class="[isTerminal ? 'p-0 bg-transparent' : 'p-6 bg-transparent']"
+        :class="[isTerminal ? 'p-0 pb-28 md:pb-0 bg-transparent' : 'p-6 pb-28 md:pb-6 bg-transparent']"
       >
         <slot />
       </div>

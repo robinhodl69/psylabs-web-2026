@@ -37,9 +37,9 @@ import WindowContainer from '../components/os/WindowContainer.vue'
 
 <style scoped>
 /* 
-  Efecto Ghost: 
-  Utilizamos screen para que el fondo negro del widget desaparezca 
-  y se fusione con el gradiente violeta de la ventana.
+  Ghost Effect: 
+  Applying mix-blend-mode: screen to eliminate the widget's black background,
+  allowing it to seamlessly blend with the window's violet gradient.
 */
 .soundcloud-ghost-filter {
   mix-blend-mode: screen;
