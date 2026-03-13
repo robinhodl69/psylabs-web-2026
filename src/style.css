@@ -115,6 +115,21 @@
   background-blend-mode: overlay, screen, screen, screen, screen, screen;
 }
 
+/* Mobile-specific background optimizations */
+@media (max-width: 768px) {
+  .bg-abstract {
+    background-attachment: scroll; /* Fix for Safari iOS performance and rendering */
+    background-image:
+      /* LAYER 1: Softer noise for mobile */
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E"),
+      radial-gradient(at 80% 10%, rgba(59, 180, 253, 0.15) 0%, transparent 50%),
+      radial-gradient(at 10% 90%, rgba(132, 59, 253, 0.18) 0%, transparent 60%),
+      radial-gradient(at 25% 20%, rgba(132, 59, 253, 0.12) 0%, transparent 40%),
+      radial-gradient(at 90% 85%, rgba(59, 180, 253, 0.1) 0%, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(132, 59, 253, 0.05) 0%, transparent 70%);
+  }
+}
+
 @keyframes vhs-glitch {
 
   0%,
@@ -257,7 +272,22 @@ h3 {
 /* Hack para Safari (Detecta que es Safari y sobreescribe el grosor para evitar el glitch gordo) */
 @supports (background: -webkit-named-image(i)) {
   .text-liquid-graffiti {
-    -webkit-text-stroke: 1.5px #1e1b4b;
+    -webkit-text-stroke: 4px #1e1b4b; /* Re-adjusted for better inflation in Safari */
+  }
+}
+
+/* Mobile Typography Overrides */
+@media (max-width: 768px) {
+  .text-liquid-graffiti {
+    -webkit-text-stroke: 3px #1e1b4b;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  
+  @supports (background: -webkit-named-image(i)) {
+    .text-liquid-graffiti {
+      -webkit-text-stroke: 2.5px #1e1b4b;
+    }
   }
 }
 
